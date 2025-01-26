@@ -1,8 +1,8 @@
 @charset 'utf-8';
 
 :root {
-  --black-color: rgb(29, 29, 31);
-  --white-color: rgb(255, 255, 255);
+  --black-color: rgba(29, 29, 31);
+  --white-color: rgba(255, 255, 255);
   --border-gray-color: rgba(221, 221, 221, 1);
 }
 
