@@ -118,11 +118,11 @@ a {
   height: 100px;
   background-color: var(--black-color);
 }
-#scroll-section-2 .message-b {
+#scroll-section-2 .b {
   top: 10%;
   left: 40%;
 }
-#scroll-section-2 .message-c {
+#scroll-section-2 .c {
   top: 15%;
   left: 45%;
 }
@@ -185,11 +185,11 @@ a {
   .desc-message {
     width: 20%;
   }
-  #scroll-section-2 .message-b {
+  #scroll-section-2 .b {
     top: 20%;
     left: 53%;
   }
-  #scroll-section-2 .message-c {
+  #scroll-section-2 .c {
     left: 55%;
   }
   .mid-message {
