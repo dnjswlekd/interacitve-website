@@ -74,6 +74,7 @@ a {
   text-align: center;
 }
 .main-message {
+  top: 35vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +147,6 @@ a {
   display: none;
   position: fixed;
   width: 100%;
-  top: 0;
   left: 0;
 }
 #show-scene-0 #scroll-section-0 .sticky-elem,
