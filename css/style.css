@@ -28,6 +28,7 @@ a {
 /* nav */
 .global-nav {
   position: absolute;
+  z-index: 10;
   top: 0;
   left: 0;
   right: 0;
@@ -37,6 +38,7 @@ a {
 }
 .local-nav {
   position: absolute;
+  z-index: 11;
   top: 45px;
   left: 0;
   right: 0;
@@ -156,6 +158,10 @@ a {
   position: fixed;
   width: 100%;
   left: 0;
+}
+.sticky-elem-canvas {
+  top: 0;
+  background-color: #ccc;
 }
 #show-scene-0 #scroll-section-0 .sticky-elem,
 #show-scene-1 #scroll-section-1 .sticky-elem,
