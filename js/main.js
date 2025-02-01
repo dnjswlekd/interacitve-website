@@ -94,6 +94,7 @@
         pinC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
       },
     },
+    test,
     {
       // 3
       type: 'sticky',
