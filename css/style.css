@@ -72,6 +72,12 @@ a {
   padding-top: 50vh;
 }
 #scroll-section-0 h1 {
+<<<<<<< HEAD
+=======
+  position: relative;
+  top: -10vh;
+  z-index: 5;
+>>>>>>> f79ad23 ([update] image playanimation)
   font-size: 4rem;
   text-align: center;
 }
@@ -161,7 +167,16 @@ a {
 }
 .sticky-elem-canvas {
   top: 0;
+<<<<<<< HEAD
   background-color: #ccc;
+=======
+  height: 100%;
+}
+.sticky-elem-canvas canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+>>>>>>> f79ad23 ([update] image playanimation)
 }
 #show-scene-0 #scroll-section-0 .sticky-elem,
 #show-scene-1 #scroll-section-1 .sticky-elem,
