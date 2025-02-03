@@ -105,6 +105,16 @@
         canvasCaption: document.querySelector('.canvas-caption'),
         canvas: document.querySelector('.image-blend-canvas'),
         context: document.querySelector('.image-blend-canvas').getContext('2d'),
+        imagesPath: [
+          './images/blend-image-1.jpg',
+          './images/blend-image-2.jpg',
+        ],
+        images: [],
+      },
+      values: {
+        rect1X: [0, 0, { start: 0, end: 0 }],
+        rect2X: [0, 0, { start: 0, end: 0 }],
+        rectStartY: 0,
       },
     },
   ];
@@ -125,6 +135,14 @@
       imgElem2.src = `./video/002/IMG_${7027 + i}.JPG`;
       sceneInfo[2].objs.videoImages.push(imgElem2);
     }
+
+    let imgElem3;
+    for (let i = 0; i < sceneInfo[3].objs.imagesPath.length; i++) {
+      // imgElem3 = document.createElement('img');
+      imgElem3 = new Image();
+      imgElem3.src = sceneInfo[3].objs.imagesPath[i];
+      sceneInfo[3].objs.images.push(imgElem3);
+    }
   }
   setCanvasImages();
 
@@ -142,6 +160,7 @@
     }
 
     yOffset = window.pageYOffset;
+
     let totalScrollHeight = 0;
     for (let i = 0; i < sceneInfo.length; i++) {
       totalScrollHeight += sceneInfo[i].scrollHeight;
@@ -408,7 +427,7 @@
       case 3:
         // console.log('3 play');
         // 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅 (계산 필요함)
-        const widthRatio = window.innerWidth / objs.canvas.width;
+        const widthRatio = document.body.offsetWidth / objs.canvas.width;
         const heightRatio = window.innerHeight / objs.canvas.height;
         let canvasScaleRatio;
 
@@ -421,7 +440,52 @@
         }
 
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objs.context.drawImage(objs.images[0], 0, 0);
 
+        // 캔버스 사이즈에 맞춰 가정한 innerWidth 와 innerHeight
+        const recalculatedInnerWidth = window.innerWidth / canvasScaleRatio;
+        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+        if (!values.rectStartY) {
+          values.rectStartY = objs.canvas.getBoundingClientRect().top;
+          values.rect1X[2].end = values.rectStartY / scrollHeight;
+          values.rect2X[2].end = values.rectStartY / scrollHeight;
+          console.log(values.rectStartY);
+        }
+
+        const whiteRectWidth = recalculatedInnerWidth * 0.15;
+        values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
+        values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
+        values.rect2X[0] =
+          values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
+        values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+
+        //좌우 흰색 박스 그리기
+        // objs.context.fillRect(
+        //   values.rect1X[0],
+        //   0,
+        //   parseInt(whiteRectWidth),
+        //   objs.canvas.height
+        // ),
+        //   objs.context.fillRect(
+        //     values.rect2X[0],
+        //     0,
+        //     parseInt(whiteRectWidth),
+        //     recalculatedInnerHeight
+        //   );
+
+        objs.context.fillRect(
+          parseInt(calcValues(values.rect1X, currentYOffset)),
+          0,
+          parseInt(whiteRectWidth),
+          objs.canvas.height
+        );
+        objs.context.fillRect(
+          parseInt(calcValues(values.rect2X, currentYOffset)),
+          0,
+          parseInt(whiteRectWidth),
+          objs.canvas.height
+        );
         break;
     }
   }
@@ -429,6 +493,7 @@
   function scrollLoop() {
     enterNewScene = false;
     prevScrollHeight = 0;
+
     for (let i = 0; i < currentScene; i++) {
       // prevScrollHeight = prevScrollHeight + sceneInfo[i.scrollHeight];
       prevScrollHeight += sceneInfo[i].scrollHeight;
