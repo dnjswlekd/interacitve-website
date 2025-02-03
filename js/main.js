@@ -560,7 +560,6 @@
           // 캔버스가 브라우저 상단에 닿기 전
           step = 1;
           objs.canvas.classList.remove('sticky');
-          console.log('캔버스가 브라우저 상단에 닿기 전');
         } else {
           // 이미지 블렌드
           step = 2;
@@ -588,21 +587,26 @@
           objs.canvas.style.top = `${
             -(objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2
           }px`;
-          [0, 0, { start: 0, end: 0 }],
-            console.log('캔버스가 브라우저 상단에 닿은 후');
 
           if (scrollRatio > values.blendHeight[2].end) {
             values.canvas_scale[0] = canvasScaleRatio;
             values.canvas_scale[1] =
               document.body.offsetWidth / (1.5 * objs.canvas.width);
             values.canvas_scale[2].start = values.blendHeight[2].end;
-            values.canvas_scale[2].end = values.canvas_scale[2].start;
-            +0.2;
+            values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2;
 
             objs.canvas.style.transform = `scale(${calcValues(
               values.canvas_scale,
               currentYOffset
             )})`;
+            objs.canvas.style.marginTop = 0;
+          }
+          if (
+            scrollRatio > values.canvas_scale[2].end &&
+            values.canvas_scale[2].end > 0
+          ) {
+            objs.canvas.classList.remove('sticky');
+            objs.canvas.style.marginTop = `${scrollHeight * 0.4}px`;
           }
         }
 
