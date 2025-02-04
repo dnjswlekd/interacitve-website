@@ -533,7 +533,6 @@
           values.rect2X[2].start = window.innerHeight / 2 / scrollHeight;
           values.rect1X[2].end = values.rectStartY / scrollHeight;
           values.rect2X[2].end = values.rectStartY / scrollHeight;
-          console.log(values.rectStartY);
         }
 
         const whiteRectWidth = recalculatedInnerWidth * 0.15;
@@ -720,6 +719,7 @@
     if (window.innerWidth < 600) {
       setLayout();
     }
+    sceneInfo[3].values.rectStartY = 0;
   });
 
   // 모바일 가로세로 바꿀 때
