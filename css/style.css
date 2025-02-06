@@ -58,7 +58,12 @@ a {
   position: fixed;
   top: 0;
   background: rgba(255, 255, 255, 0.1);
+  /* iPhone */
   -webkit-backdrop-filter: saturate(180%) blur(15px);
+  /* firefox */
+  -moz-backdrop-filter: saturate(180%) blur(15px);
+  /* opera */
+  -p-backdrop-filter: saturate(180%) blur(15px);
   backdrop-filter: saturate(180%) blur(15px);
 }
 .global-nav .global-nav-links,
