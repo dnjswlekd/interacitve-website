@@ -18,6 +18,9 @@ body {
   color: var(--black-color);
   background: var(--white-color);
 }
+body.before-load {
+  overflow: hidden;
+}
 p {
   line-height: 1.6;
 }

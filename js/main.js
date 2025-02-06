@@ -681,16 +681,6 @@
     }
   }
 
-  window.addEventListener('scroll', () => {
-    yOffset = window.pageYOffset;
-    scrollLoop();
-    checkMenu();
-
-    if (!rafState) {
-      rafId = requestAnimationFrame(loop);
-      rafState = true;
-    }
-  });
   // 돔 html 객체들만 로딩되어도 실행됨
   // window.addEventListener('DomContentLoaded', setLayout);
   // 이미지들 등 리소스들까지 다 로딩되고나서 실행됨
@@ -699,18 +689,33 @@
 
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
-  });
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 600) {
-      setLayout();
-    }
-    sceneInfo[3].values.rectStartY = 0;
+
+    window.addEventListener('scroll', () => {
+      yOffset = window.pageYOffset;
+      scrollLoop();
+      checkMenu();
+
+      if (!rafState) {
+        rafId = requestAnimationFrame(loop);
+        rafState = true;
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth < 600) {
+        setLayout();
+      }
+      sceneInfo[3].values.rectStartY = 0;
+    });
+
+    // 모바일 가로세로 바꿀 때
+    window.addEventListener('orientationchange', setLayout);
+    document
+      .querySelector('.loading')
+      .addEventListener('transitionend', (e) => {
+        document.body.removeChild(e.currentTarget);
+      });
   });
 
-  // 모바일 가로세로 바꿀 때
-  window.addEventListener('orientationchange', setLayout);
-  document.querySelector('.loading').addEventListener('transitionend', (e) => {
-    document.body.removeChild(e.currentTarget);
-  });
   setCanvasImages();
 })();
