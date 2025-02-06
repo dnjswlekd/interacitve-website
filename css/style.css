@@ -21,6 +21,10 @@ body {
 body.before-load {
   overflow: hidden;
 }
+.container {
+  /* 모바일 가로 스크롤 방지 */
+  overflow-x: hidden;
+}
 p {
   line-height: 1.6;
 }
