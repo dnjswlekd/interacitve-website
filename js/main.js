@@ -685,10 +685,25 @@
   // window.addEventListener('DomContentLoaded', setLayout);
   // 이미지들 등 리소스들까지 다 로딩되고나서 실행됨
   window.addEventListener('load', () => {
+    // debugger;
+
     document.body.classList.remove('before-load');
 
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+
+    let tempYOffset = yOffset;
+    let tempScrollCount = 0;
+
+    let siId = setInterval(() => {
+      window.scrollTo(0, tempYOffset);
+      tempYOffset += 5;
+
+      if (tempScrollCount > 20) {
+        clearInterval(siId);
+      }
+      tempScrollCount++;
+    }, 20);
 
     window.addEventListener('scroll', () => {
       yOffset = window.pageYOffset;
@@ -703,14 +718,16 @@
 
     window.addEventListener('resize', () => {
       if (window.innerWidth < 900) {
-        setLayout();
-        sceneInfo[3].values.rectStartY = 0;
+        // setLayout();
+        // sceneInfo[3].values.rectStartY = 0;
+        window.location.reload();
       }
     });
 
     // 모바일 가로세로 바꿀 때
     window.addEventListener('orientationchange', () => {
-      setTimeout(setLayout, 500);
+      scrollTo(0, 0);
+      setTimeout(window.location.reload(), 500);
     });
     document
       .querySelector('.loading')
